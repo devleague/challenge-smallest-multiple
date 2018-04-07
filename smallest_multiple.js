@@ -8,19 +8,50 @@
  */
 module.exports = function(ceiling) {
   // do work here
-  let i = ceiling;
-  let notFound = true;
-  while (notFound) {
-    for (let j = 1; j <= ceiling; j++) {
-      if (i % j !== 0) {
-        i++;
-        break;
+
+  function primeFactorization(num) {
+    if (num < 2) {
+      return { 1: 1 };
+    }
+    let result = {};
+
+    for (let i = 2; i <= num; i++) {
+      if (num % i === 0) {
+        if (result.hasOwnProperty(i)) {
+          result[i]++;
+        } else {
+          result[i] = 1;
+        }
+        num = num / i;
+        // need i to be two in the next loop, but the loop will end with i incrementing so it has to be one here
+        i = 1;
       }
-      if (j === ceiling) {
-        notFound = false;
+    }
+    return result;
+  }
+
+  let smallestMultiple = {};
+  let result = 1;
+
+  for (let i = 2; i < ceiling; i++) {
+    let primeFactors = primeFactorization(i);
+    for (const key in primeFactors) {
+      if (primeFactors.hasOwnProperty(key)) {
+        if (smallestMultiple.hasOwnProperty(key)) {
+          if (primeFactors[key] > smallestMultiple[key]) {
+            smallestMultiple[key] = primeFactors[key];
+          }
+        } else {
+          smallestMultiple[key] = primeFactors[key];
+        }
       }
     }
   }
+  for (const key in smallestMultiple) {
+    if (smallestMultiple.hasOwnProperty(key)) {
+      result *= Math.pow(key, smallestMultiple[key]);
+    }
+  }
 
-  return i;
+  return result;
 };
