@@ -6,9 +6,27 @@
  * @return { Number }         Lowest Positive Number that is evenly divisible by all numbers
  *                            between 1 and `ceiling`
  */
-module.exports = function( ceiling ) {
-  // do work here
+module.exports = function (ceiling) {
+  let gamut = [];
+  let number = 2;
+  let pass = 0;
+
+  for (let i = 1; i <= ceiling; i++) {
+    gamut.push(i);
+  }
+
+  while (pass < gamut.length) {
+    for (let x = 0; x < gamut.length; x++) {
+      if (number % gamut[x] === 0) {
+        pass++
+      } else {
+        pass = 0;
+        number += 2;
+        break;
+      }
+    }
+  }
 
 
-  return 0;
+  return number;
 };
