@@ -7,7 +7,7 @@
  *                            between 1 and `ceiling`
  */
 module.exports = function (ceiling) {
-  let gamut = [];
+  const gamut = [];
   let number = 1;
   let pass = 0;
 
@@ -26,7 +26,6 @@ module.exports = function (ceiling) {
       }
     }
   }
-
 
   return number;
 };
