@@ -8,7 +8,7 @@
  */
 module.exports = function (ceiling) {
   let gamut = [];
-  let number = 2;
+  let number = 1;
   let pass = 0;
 
   for (let i = 1; i <= ceiling; i++) {
@@ -21,7 +21,7 @@ module.exports = function (ceiling) {
         pass++
       } else {
         pass = 0;
-        number += 2;
+        number += 1;
         break;
       }
     }
